@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MentorsController;
 use App\Http\Controllers\TrainingSessionController;
+use App\Http\Controllers\UserController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +36,15 @@ Route::middleware(['auth','verified','admin'])->group(function () {
     Route::get('/adminpage',[AdminController::class,'index'])->name('admin');
     Route::resource('training_sessions', TrainingSessionController::class);
     Route::resource('mentors', MentorsController::class);
+    });
+
+Route::middleware(['auth','verified'])->group(function () {
+    Route::get('/user/training-sessions', [UserController::class, 'trainingSessions'])->name('user.training_sessions');
+    Route::get('/user/responsible-sessions', [UserController::class, 'responsibleSessions'])->name('user.responsible_sessions');
+    Route::get('/responsible_sessions/{session}/submit', [UserController::class, 'showSessionForm'])->name('responsible_sessions.submit');
+    Route::post('/responsible_sessions/{session}/submit', [UserController::class, 'createPostTrainingSession'])->name('responsible_sessions.createPost');
 });
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

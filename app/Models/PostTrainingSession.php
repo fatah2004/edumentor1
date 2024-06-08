@@ -4,7 +4,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TrainingSession extends Model
+class PostTrainingSession extends Model
 {
     use HasFactory;
 
@@ -14,20 +14,17 @@ class TrainingSession extends Model
         'start_time',
         'end_time',
         'responsible_mentor_id',
+        'original_session_id',
     ];
 
-    public function responsibleMentor()
+    public function originalSession()
     {
-        return $this->belongsTo(User::class, 'responsible_mentor_id');
+        return $this->belongsTo(TrainingSession::class, 'original_session_id');
     }
 
     public function users()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class, 'post_training_session_user', 'post_training_session_id', 'user_id');
     }
-    public function postTrainingSessions()
-    {
-        return $this->hasMany(PostTrainingSession::class, 'original_session_id');
-    }
-
+    
 }

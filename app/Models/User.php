@@ -37,4 +37,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(TrainingSession::class, 'training_session_user', 'user_id', 'training_session_id');
     }
+
+    public function postTrainingSessions()
+    {
+        return $this->belongsToMany(PostTrainingSession::class, 'post_training_session_user', 'user_id', 'post_training_session_id');
+    }
 }

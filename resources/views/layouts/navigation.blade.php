@@ -24,6 +24,17 @@
                             {{ __('Manage Mentors') }}
                         </x-nav-link>
                     @endif
+
+                    @if(Auth::user()->usertype == 'user')
+                        <x-nav-link :href="route('user.training_sessions')" :active="request()->routeIs('user.training_sessions')">
+                            {{ __('My Training Sessions') }}
+                        </x-nav-link>
+                        @if($isResponsible)
+                            <x-nav-link :href="route('user.responsible_sessions')" :active="request()->routeIs('user.responsible_sessions')">
+                                {{ __('Responsible Training Sessions') }}
+                            </x-nav-link>
+                        @endif
+                    @endif
                 </div>
             </div>
 
@@ -87,6 +98,17 @@
                 <x-responsive-nav-link :href="route('mentors.index')" :active="request()->routeIs('mentors.index')">
                     {{ __('Manage Mentors') }}
                 </x-responsive-nav-link>
+            @endif
+
+            @if(Auth::user()->usertype == 'user')
+                <x-responsive-nav-link :href="route('user.training_sessions')" :active="request()->routeIs('user.training_sessions')">
+                    {{ __('My Training Sessions') }}
+                </x-responsive-nav-link>
+                @if($isResponsible)
+                    <x-responsive-nav-link :href="route('user.responsible_sessions')" :active="request()->routeIs('user.responsible_sessions')">
+                        {{ __('Responsible Training Sessions') }}
+                    </x-responsive-nav-link>
+                @endif
             @endif
         </div>
 
