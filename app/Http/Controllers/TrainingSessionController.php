@@ -75,12 +75,13 @@ class TrainingSessionController extends Controller
         $session = TrainingSession::with('users', 'responsibleMentor')->findOrFail($id);
         return view('training_sessions.show', compact('session'));
     }
-
+    
     public function edit($id)
     {
         $session = TrainingSession::findOrFail($id);
         $users = User::all();
-        return view('training_sessions.edit', compact('session', 'users'));
+        $selectedAttendees = $session->users()->pluck('users.id')->toArray();
+        return view('training_sessions.edit', compact('session', 'users', 'selectedAttendees'));
     }
 
     public function update(Request $request, $id)

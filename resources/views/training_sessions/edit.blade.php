@@ -38,6 +38,15 @@
                             <input type="number" name="responsible_mentor_id" id="responsible_mentor_id" value="{{ $session->responsible_mentor_id }}" class="form-input mt-1 block w-full">
                         </div>
 
+                        @foreach($users as $user)
+                        <div class="mb-2">
+                            <input type="checkbox" name="attendees[]" value="{{ $user->id }}" 
+                                   {{ in_array($user->id, $selectedAttendees) ? 'checked' : '' }}>
+                            <label for="attendees[{{ $user->id }}]">{{ $user->name }}</label>
+                        </div>
+                    @endforeach
+                    
+
                         <div class="mb-4">
                             <button type="submit" class="btn btn-primary">{{ __('Update') }}</button>
                         </div>

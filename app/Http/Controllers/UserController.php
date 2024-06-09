@@ -21,12 +21,14 @@ class UserController extends Controller
     {
         $user = Auth::user();
         
-        // Get all attended sessions
-        $attendedSessions = $user->attendedSessions->map(function ($session) {
-            // Check if a post-training session exists for the attended session
-            $session->hasPostSession = $session->postTrainingSessions()->exists();
+        $attendedSessions = $user->attendedSessions->map(function ($session) use ($user) {
+            // Check if a post-training session exists for the attended session and belongs to the user
+            $session->hasPostSession = $session->postTrainingSessions()->whereHas('users', function ($query) use ($user) {
+                $query->where('users.id', $user->id);
+            })->exists();
             return $session;
         });
+    
         
         // Separate regular sessions and post sessions
         $regularSessions = $attendedSessions->reject(function ($session) {
@@ -41,16 +43,19 @@ class UserController extends Controller
     }
     
     public function responsibleSessions()
-    {
-        $user = Auth::user();
-        $sessions = $user->responsibleSessions->map(function ($session) {
-            // Check if a post-training session exists for the responsible session
-            $session->hasPostSession = $session->postTrainingSessions()->exists();
-            return $session;
-        });
-    
-        return view('user.responsible_sessions', compact('sessions'));
-    }
+{
+    $user = Auth::user();
+    $currentDateTime = now()->timezone('Africa/Casablanca'); // Set the timezone to Casablanca
+
+    $sessions = $user->responsibleSessions->map(function ($session) {
+        // Check if a post-training session exists for the responsible session
+        $session->hasPostSession = $session->postTrainingSessions()->exists();
+        return $session;
+    });
+
+    return view('user.responsible_sessions', compact('sessions', 'currentDateTime'));
+}
+
     
     public function showSessionForm($sessionId)
 {

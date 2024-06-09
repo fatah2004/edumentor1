@@ -30,4 +30,22 @@ class TrainingSession extends Model
         return $this->hasMany(PostTrainingSession::class, 'original_session_id');
     }
 
+    public function hasPostSession()
+    {
+        return $this->postTrainingSessions()->exists();
+    }
+
+    public function userAttendedPostSession($user)
+{
+    // Check if the post session exists and the user attended it
+    return $this->postTrainingSessions()->whereHas('users', function ($query) use ($user) {
+        $query->where('users.id', $user->id);
+    })->exists();
+}
+protected $casts = [
+    'start_time' => 'datetime',
+    'end_time' => 'datetime',
+];
+
+
 }
