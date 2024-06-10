@@ -3,6 +3,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class TrainingSession extends Model
 {
@@ -46,6 +47,7 @@ protected $casts = [
     'start_time' => 'datetime',
     'end_time' => 'datetime',
 ];
+
 
 
 }

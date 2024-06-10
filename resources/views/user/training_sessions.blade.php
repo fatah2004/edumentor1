@@ -12,8 +12,8 @@
 
                     <!-- Switch button -->
                     <div class="mb-4">
-                        <button id="showRegular" class="btn btn-secondary">{{ __('Show Regular Sessions') }}</button>
-                        <button id="showPost" class="btn btn-secondary">{{ __('Show Post Sessions') }}</button>
+                        <button id="showRegular" style="background-color:rgb(43, 149, 255);" class="px-4 py-2 bg-indigo-500 text-white rounded hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600">{{ __('Show Regular Sessions') }}</button>
+                        <button id="showPost" style="background-color:rgb(43, 149, 255);"  class="px-4 py-2 bg-indigo-500 text-white rounded hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600">{{ __('Show Post Sessions') }}</button>
                     </div>
 
                     <!-- Regular Sessions -->

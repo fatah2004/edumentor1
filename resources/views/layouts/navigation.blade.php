@@ -23,6 +23,9 @@
                         <x-nav-link :href="route('mentors.index')" :active="request()->routeIs('mentors.index')">
                             {{ __('Manage Mentors') }}
                         </x-nav-link>
+                        <x-nav-link :href="route('feedback.adminindex')" :active="request()->routeIs('feedback.adminindex')">
+                            {{ __('Feedback') }}
+                        </x-nav-link>
                     @endif
 
                     @if(Auth::user()->usertype == 'user')
@@ -34,6 +37,9 @@
                                 {{ __('Responsible Training Sessions') }}
                             </x-nav-link>
                         @endif
+                        <x-nav-link :href="route('feedback.index')" :active="request()->routeIs('feedback.index')">
+                            {{ __('Feedback') }}
+                        </x-nav-link>
                     @endif
                 </div>
             </div>
@@ -98,6 +104,9 @@
                 <x-responsive-nav-link :href="route('mentors.index')" :active="request()->routeIs('mentors.index')">
                     {{ __('Manage Mentors') }}
                 </x-responsive-nav-link>
+                <x-nav-link :href="route('feedback.index')" :active="request()->routeIs('feedback.index')">
+                    {{ __('Feedback') }}
+                </x-nav-link>
             @endif
 
             @if(Auth::user()->usertype == 'user')
@@ -109,6 +118,9 @@
                         {{ __('Responsible Training Sessions') }}
                     </x-responsive-nav-link>
                 @endif
+                <x-nav-link :href="route('feedback.index')" :active="request()->routeIs('feedback.index')">
+                    {{ __('Feedback') }}
+                </x-nav-link>
             @endif
         </div>
 
